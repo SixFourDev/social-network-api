@@ -1,9 +1,10 @@
+const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 
 const reactionSchema = new Schema({
     reactionId: {
-        type: Schema.Types.ObjectId,
-        default: new Schema.Types.ObjectId(),
+        type: mongoose.Types.ObjectId,
+        default: new mongoose.Types.ObjectId(),
     },
     reactionBody: {
         type: String,
@@ -35,7 +36,28 @@ const thoughtSchema = new Schema({
         type: String,
         required: true,
     },
-    reactions: [reactionSchema],
+    reactions: [
+        {
+            reactionId: {
+                type: mongoose.Types.ObjectId, // Update this line
+                default: new mongoose.Types.ObjectId(), // Update this line
+            },
+            reactionBody: {
+                type: String,
+                required: true,
+                maxlength: 280,
+            },
+            username: {
+                type: String,
+                required: true,
+            },
+            createdAt: {
+                type: Date,
+                default: Date.now,
+                get: (createdAt) => createdAt.toLocaleString(),
+            },
+        },
+    ],
 });
 
 // Virtual property for formatted timestamp

@@ -5,10 +5,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Connect to your MongoDB database
-mongoose.connect('mongodb://localhost:27017/your-database-name', {
+mongoose.connect('mongodb://localhost:27017/social-network-api', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
 })
 .then(() => {
     console.log('Connected to MongoDB');
